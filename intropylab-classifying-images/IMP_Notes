@@ -1,0 +1,13 @@
+1) Changes in check_images.py
+        a) time - start and end time code
+        b) argparse
+        c) os.listdir - and associated usage for getting filenames from a directory
+
+2) Another important file is classifier.py - this can be tested using test_classifier.py
+	a) this is the actual evaluation algorithm part of the project
+    b) Uses a dict of imagenet index to prediction, calculates the predicted index and returns the prediction corresponding to this index
+
+-- Files that can be ignored:
+    1) timing_code.py  - covers time()
+    2) command_line_arguments.py  - covers argparse
+    3) data_structure.py -- covers using dict to store lists
