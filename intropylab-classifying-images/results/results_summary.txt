@@ -1,0 +1,43 @@
+     The model resnet correctly classified 100.0% of the images of dogs as dogs! It also correctly classified the breeds in 90.0% of the cases. Overall, it was able to label 82.5% of the entire population. The total images were 40 out of which 30 were dogs
+dogs not classified as dogs are: 
+misclassified breeds are: 
+Beagle_01170.jpg
+['beagle', 'walker hound, walker foxhound', 0, 1, 1]
+Golden_retriever_05182.jpg
+['golden retriever', 'leonberg', 0, 1, 1]
+Great_pyrenees_05367.jpg
+['great pyrenees', 'kuvasz', 0, 1, 1]
+
+** Total Elapsed Runtime: 4.09329080581665
+
+Total Elapsed Runtime: 0:0:4
+     The model alexnet correctly classified 100.0% of the images of dogs as dogs! It also correctly classified the breeds in 80.0% of the cases. Overall, it was able to label 75.0% of the entire population. The total images were 40 out of which 30 were dogs
+dogs not classified as dogs are: 
+misclassified breeds are: 
+Beagle_01170.jpg
+['beagle', 'walker hound, walker foxhound', 0, 1, 1]
+Boston_terrier_02285.jpg
+['boston terrier', 'basenji', 0, 1, 1]
+Beagle_01141.jpg
+['beagle', 'english foxhound', 0, 1, 1]
+Golden_retriever_05182.jpg
+['golden retriever', 'tibetan mastiff', 0, 1, 1]
+Great_pyrenees_05367.jpg
+['great pyrenees', 'kuvasz', 0, 1, 1]
+Golden_retriever_05257.jpg
+['golden retriever', 'afghan hound, afghan', 0, 1, 1]
+
+** Total Elapsed Runtime: 1.8837838172912598
+
+Total Elapsed Runtime: 0:0:1
+     The model vgg correctly classified 100.0% of the images of dogs as dogs! It also correctly classified the breeds in 93.33333333333333% of the cases. Overall, it was able to label 90.0% of the entire population. The total images were 40 out of which 30 were dogs
+dogs not classified as dogs are: 
+misclassified breeds are: 
+Beagle_01170.jpg
+['beagle', 'walker hound, walker foxhound', 0, 1, 1]
+Great_pyrenees_05367.jpg
+['great pyrenees', 'kuvasz', 0, 1, 1]
+
+** Total Elapsed Runtime: 16.041145086288452
+
+Total Elapsed Runtime: 0:0:16

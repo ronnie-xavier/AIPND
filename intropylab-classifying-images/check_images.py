@@ -65,11 +65,12 @@ def main():
     # TODO: 6. Define calculates_results_stats() function to calculate
     # results of run and puts statistics in a results statistics
     # dictionary (results_stats_dic)
-    results_stats_dic = calculates_results_stats()
+    results_stats_dic = calculates_results_stats(result_dic)
+#    print (results_stats_dic)
 
     # TODO: 7. Define print_results() function to print summary results, 
     # incorrect classifications of dogs and breeds if requested.
-    print_results()
+    print_results(result_dic, results_stats_dic, in_arg.arch, True, True)
 
     # TODO: 1. Define end_time to measure total program runtime
     # by collecting end time
@@ -77,14 +78,13 @@ def main():
 
     # TODO: 1. Define tot_time to computes overall runtime in
     # seconds & prints it in hh:mm:ss format
-    tot_time = start_time - end_time
+    tot_time = end_time - start_time
     print("\n** Total Elapsed Runtime:", tot_time)
 
     # Prints overall runtime in format hh:mm:ss
     print("\nTotal Elapsed Runtime:", str( int( (tot_time / 3600) ) ) + ":" +
           str( int(  ( (tot_time % 3600) / 60 )  ) ) + ":" + 
-          str( int(  ( (tot_time % 3600) % 60 ) ) ) ) 
-
+          str( int(  ( (tot_time % 3600) % 60 ) ) ) )
 
 
 # TODO: 2.-to-7. Define all the function below. Notice that the input 
@@ -322,7 +322,7 @@ def adjust_results4_isadog(results_dic, dogsfile):
 
 #    print(results_dic)
 
-def calculates_results_stats():
+def calculates_results_stats(results_dic):
     """
     Calculates statistics of the results of the run using classifier's model 
     architecture on classifying images. Then puts the results statistics in a 
@@ -346,10 +346,52 @@ def calculates_results_stats():
                      name (starting with 'pct' for percentage or 'n' for count)
                      and the value is the statistic's value 
     """
-    pass
+    
+    results_stats = dict()
+    n_dog_images, n_nondog_images, n_correct_dogs = 0,0,0
+    n_correct_nondogs, n_correct_breed, n_correct_label  = 0,0,0
+
+    n_images = len(results_dic)
+    
+    
+    for key in results_dic:
+        if results_dic[key][3] == 1:
+            n_dog_images += 1
+        if results_dic[key][3] == 1 and results_dic[key][4] == 1:
+            n_correct_dogs += 1
+        if results_dic[key][3] == 0 and results_dic[key][4] == 0:
+            n_correct_nondogs += 1
+        if results_dic[key][2]==1 and results_dic[key][3]==1:
+            n_correct_breed += 1
+            
+        if results_dic[key][2]==1:            
+            n_correct_label += 1
+        
+        
+        
+    n_nondog_images = n_images - n_dog_images
+    
+    results_stats ['n_images'] = n_images
+    results_stats ['n_dog_images'] = n_dog_images
+    results_stats ['n_nondog_images'] = n_nondog_images
+    
+    results_stats ['n_correct_dogs'] = n_correct_dogs
+    results_stats ['n_correct_nondogs'] = n_correct_nondogs
+
+    results_stats ['n_correct_breed'] = n_correct_breed
+    results_stats ['n_correct_label'] = n_correct_label
+
+    percentage_calculator = lambda x,y: x*100/y if y != 0 else 0
+
+    results_stats ['pct_correct_dogs'] = percentage_calculator (n_correct_dogs, n_dog_images)
+    results_stats ['pct_correct_nondogs'] = percentage_calculator (n_correct_nondogs, n_nondog_images)
+    results_stats ['pct_correct_breed'] = percentage_calculator (n_correct_breed, n_dog_images)
+    results_stats ['pct_correct_label'] = percentage_calculator (n_correct_label, n_images)
+    
+    return results_stats
 
 
-def print_results():
+def print_results(results_dic, results_stats, model, print_incorrect_dogs=False, print_incorrect_breed=False):
     """
     Prints summary results on the classification and then prints incorrectly 
     classified dogs and incorrectly classified dog breeds if user indicates 
@@ -377,11 +419,27 @@ def print_results():
                               False doesn't print anything(default) (bool) 
     Returns:
            None - simply printing results.
-    """    
-    pass
+    """
+    
+    print('     The model {} correctly classified {}% of the images of dogs as dogs! It also correctly classified the breeds in {}% of the cases. Overall, it was able to label {}% of the entire population. The total images were {} out of which {} were dogs'.format(model, results_stats['pct_correct_dogs'], results_stats['pct_correct_breed'],results_stats['pct_correct_label'],
+                     results_stats['n_images'],results_stats['n_dog_images']))
+
+    if print_incorrect_dogs:
+        print ("dogs not classified as dogs are: ")
+        for key in results_dic:
+            if results_dic[key][3]==1 and results_dic[key][4]==0:
+                print (key)
+                print (results_dic[key])
+    
+    if print_incorrect_breed:
+        print ("misclassified breeds are: ")
+        for key in results_dic:
+            if results_dic[key][3]==1 and results_dic[key][2]==0:
+                print (key)
+                print (results_dic[key])
 
                 
-                
 # Call to main function to run the program
+
 if __name__ == "__main__":
     main()
